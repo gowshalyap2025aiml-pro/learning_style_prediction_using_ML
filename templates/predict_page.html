@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>PathIQ Quiz</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins';}
+
+body{
+background:#020617;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+}
+
+/* 🔥 TOP BUTTONS (NEW - DOES NOT BREAK UI) */
+.top-bar{
+position:fixed;
+top:20px;
+right:30px;
+}
+
+.top-bar button{
+margin-left:10px;
+padding:8px 18px;
+border:none;
+border-radius:20px;
+cursor:pointer;
+font-size:13px;
+}
+
+.home-btn{
+background:#38bdf8;
+color:black;
+}
+
+.logout-btn{
+background:#ef4444;
+color:white;
+}
+
+/* MAIN */
+.quiz-container{
+width:100%;
+max-width:700px;
+padding:20px;
+}
+
+/* progress */
+.progress{
+height:6px;
+background:#1e293b;
+border-radius:10px;
+margin-bottom:25px;
+}
+.progress-bar{
+height:100%;
+width:0%;
+background:#38bdf8;
+border-radius:10px;
+}
+
+/* box */
+.question-box{
+background:#0f172a;
+padding:30px;
+border-radius:20px;
+}
+
+/* text */
+.counter{color:#94a3b8;margin-bottom:10px;}
+.question-text{font-size:22px;margin-bottom:20px;}
+
+/* options */
+.options{display:flex;flex-direction:column;gap:12px;}
+.option{
+padding:14px;
+background:#1e293b;
+border-radius:12px;
+cursor:pointer;
+}
+.option:hover{border:1px solid #38bdf8;}
+.option.selected{
+background:#38bdf8;
+color:black;
+}
+
+/* button */
+.next-btn{
+margin-top:25px;
+padding:12px 30px;
+border:none;
+border-radius:30px;
+background:#38bdf8;
+cursor:pointer;
+display:none;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🔥 TOP BUTTONS (ADDED ONLY) -->
+<div class="top-bar">
+<a href="/"><button class="home-btn">🏠 Home</button></a>
+<a href="/logout"><button class="logout-btn">Logout</button></a>
+</div>
+
+<div class="quiz-container">
+
+<div class="progress">
+<div id="progressBar" class="progress-bar"></div>
+</div>
+
+<form id="quizForm" action="/predict" method="post">
+
+<div class="question-box">
+
+<p id="counter" class="counter"></p>
+<p id="questionText" class="question-text"></p>
+
+<div id="options" class="options"></div>
+
+<button type="button" class="next-btn" onclick="nextQuestion()">Next</button>
+
+</div>
+
+</form>
+
+<!-- RESULT -->
+{% if result %}
+<div style="margin-top:30px;background:#0f172a;padding:25px;border-radius:15px;text-align:center;">
+
+<h2>🎉 {{ name }}, Your Learning Style is</h2>
+<h1 style="color:#38bdf8;">{{ result }}</h1>
+
+<br>
+
+<p>Visual: {{ scores['Visual'] }}%</p>
+<p>Auditory: {{ scores['Auditory'] }}%</p>
+<p>Reading: {{ scores['Reading'] }}%</p>
+<p>Kinesthetic: {{ scores['Kinesthetic'] }}%</p>
+
+<br>
+
+<img src="{{ url_for('static', filename=graph) }}" style="max-width:400px;">
+
+<br><br>
+
+<a href="/"><button class="next-btn" style="display:inline-block;">🏠 Home</button></a>
+
+</div>
+{% endif %}
+
+</div>
+
+<script>
+const questions = [
+{q:"I understand concepts better when I see diagrams, charts, or images.", name:"v1"},
+{q:"Watching videos helps me learn faster.", name:"v2"},
+{q:"I prefer visual presentations.", name:"v3"},
+{q:"Visual content helps me remember longer.", name:"v4"},
+
+{q:"I learn better by listening.", name:"a1"},
+{q:"Audio helps me revise.", name:"a2"},
+{q:"Discussions help me understand.", name:"a3"},
+{q:"I prefer verbal explanation.", name:"a4"},
+
+{q:"I like reading textbooks.", name:"r1"},
+{q:"Writing notes helps me.", name:"r2"},
+{q:"I prefer written instructions.", name:"r3"},
+{q:"Rewriting improves memory.", name:"r4"},
+
+{q:"Hands-on activities help me.", name:"k1"},
+{q:"Experiments improve understanding.", name:"k2"},
+{q:"I prefer doing tasks.", name:"k3"},
+{q:"Interactive learning keeps me focused.", name:"k4"}
+];
+
+const scale = [
+{label:"Strongly Disagree", value:1},
+{label:"Disagree", value:2},
+{label:"Neutral", value:3},
+{label:"Agree", value:4},
+{label:"Strongly Agree", value:5}
+];
+
+let current = 0;
+let answers = {};
+
+function loadQuestion(){
+let q = questions[current];
+
+document.getElementById("questionText").innerText = q.q;
+document.getElementById("counter").innerText = `Question ${current+1} of ${questions.length}`;
+
+let html="";
+scale.forEach(opt=>{
+html += `<div class="option" onclick="selectOption(${opt.value}, this)">${opt.label}</div>`;
+});
+
+document.getElementById("options").innerHTML = html;
+document.querySelector(".next-btn").style.display="none";
+
+let percent=((current+1)/questions.length)*100;
+document.getElementById("progressBar").style.width=percent+"%";
+}
+
+function selectOption(value, el){
+document.querySelectorAll(".option").forEach(o=>o.classList.remove("selected"));
+el.classList.add("selected");
+
+answers[questions[current].name]=value;
+
+document.querySelector(".next-btn").style.display="inline-block";
+}
+
+function nextQuestion(){
+current++;
+
+if(current<questions.length){
+loadQuestion();
+}else{
+
+let form=document.getElementById("quizForm");
+
+/* send only values */
+for(let key in answers){
+let input=document.createElement("input");
+input.type="hidden";
+input.name=key;
+input.value=answers[key];
+form.appendChild(input);
+}
+
+form.submit();
+}
+}
+
+loadQuestion();
+</script>
+
+</body>
+</html>

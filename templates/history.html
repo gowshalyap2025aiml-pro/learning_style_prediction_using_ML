@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>My Results | PathIQ</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+
+<style>
+body{
+background:#020617;
+color:white;
+font-family:'Poppins';
+padding:40px;
+}
+
+h2{text-align:center;margin-bottom:30px;}
+
+.card{
+background:#0f172a;
+padding:20px;
+border-radius:15px;
+margin-bottom:20px;
+}
+
+.top{
+display:flex;
+justify-content:space-between;
+margin-bottom:10px;
+}
+
+.score{
+display:flex;
+gap:15px;
+font-size:14px;
+color:#94a3b8;
+}
+
+.nav{
+display:flex;
+justify-content:space-between;
+margin-bottom:20px;
+}
+
+.nav a{
+color:#38bdf8;
+text-decoration:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="nav">
+<a href="/">🏠 Home</a>
+<a href="/predict_page">🧠 Take Quiz</a>
+</div>
+
+<h2>📊 My Past Results</h2>
+
+{% for row in data %}
+<div class="card">
+
+<div class="top">
+<strong>{{ row[6] }}</strong> <!-- result -->
+<span>{{ row[7] }}</span> <!-- date -->
+</div>
+
+<div class="score">
+<span>V: {{ row[2] }}%</span>
+<span>A: {{ row[3] }}%</span>
+<span>R: {{ row[4] }}%</span>
+<span>K: {{ row[5] }}%</span>
+</div>
+
+</div>
+{% endfor %}
+
+</body>
+</html>

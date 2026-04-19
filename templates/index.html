@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>PathIQ</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#020617;
+color:white;
+}
+
+/* NAVBAR */
+.nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 60px;
+}
+
+.logo{
+font-size:24px;
+font-weight:700;
+color:#38bdf8;
+}
+
+.nav a{
+color:#94a3b8;
+text-decoration:none;
+margin-left:25px;
+font-size:15px;
+transition:0.3s;
+}
+
+.nav a:hover{
+color:white;
+}
+
+/* 🔥 NEW LOGOUT BUTTON */
+.logout-btn{
+padding:6px 15px;
+background:#ef4444;
+border:none;
+border-radius:20px;
+color:white;
+cursor:pointer;
+margin-left:15px;
+font-size:14px;
+}
+
+.logout-btn:hover{
+background:#dc2626;
+}
+
+/* HERO */
+.hero{
+padding:80px 20px 60px;
+text-align:center;
+max-width:800px;
+margin:auto;
+}
+
+.hero h1{
+font-size:48px;
+font-weight:700;
+line-height:1.2;
+}
+
+@media(max-width:768px){
+.hero h1{
+font-size:32px;
+white-space:normal;
+}
+}
+
+.hero span{
+color:#38bdf8;
+}
+
+.hero p{
+margin-top:15px;
+font-size:18px;
+color:#94a3b8;
+}
+
+/* BUTTON */
+.btn{
+margin-top:25px;
+padding:14px 35px;
+background:#38bdf8;
+border:none;
+border-radius:50px;
+font-size:16px;
+font-weight:600;
+cursor:pointer;
+transition:0.3s;
+}
+
+.btn:hover{
+transform:scale(1.08);
+box-shadow:0 10px 30px rgba(56,189,248,0.4);
+}
+
+/* FEATURES */
+.features{
+display:flex;
+justify-content:center;
+gap:25px;
+padding:40px 20px 60px;
+flex-wrap:wrap;
+}
+
+.feature{
+background:#0f172a;
+padding:28px;
+border-radius:18px;
+width:240px;
+transition:0.3s;
+border:1px solid rgba(255,255,255,0.05);
+}
+
+.feature:hover{
+transform:translateY(-8px);
+}
+
+.feature h3{
+margin-bottom:10px;
+font-size:18px;
+}
+
+.feature p{
+color:#94a3b8;
+font-size:14px;
+}
+
+/* ABOUT */
+.about{
+padding:80px 20px;
+text-align:center;
+max-width:800px;
+margin:auto;
+}
+
+.about h2{
+font-size:34px;
+margin-bottom:20px;
+}
+
+.about p{
+color:#94a3b8;
+font-size:17px;
+line-height:1.7;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<div class="nav">
+<div class="logo">PathIQ</div>
+
+<div>
+
+<!-- ✅ ALWAYS -->
+<a href="/predict_page">Start Quiz</a>
+<a href="/learning_style">Learning Styles</a>
+<a href="/history">History</a>
+
+<!-- ✅ LOGIN / LOGOUT LOGIC -->
+{% if session.user %}
+<a href="/logout"><button class="logout-btn">Logout</button></a>
+{% else %}
+<a href="/login">Login</a>
+{% endif %}
+
+</div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+<h1>Understand Your <span>Learning Style</span> in Minutes</h1>
+
+<p>
+Take a smart AI-powered quiz and discover how you actually learn best.
+</p>
+
+<a href="/predict_page">
+<button class="btn">Start Free Quiz →</button>
+</a>
+</div>
+
+<!-- FEATURES -->
+<div class="features">
+
+<div class="feature">
+<h3>🧠 AI Prediction</h3>
+<p>Hybrid ML model for accurate results</p>
+</div>
+
+<div class="feature">
+<h3>⚡ Quick Quiz</h3>
+<p>Only takes 2 minutes to complete</p>
+</div>
+
+<div class="feature">
+<h3>📊 Detailed Report</h3>
+<p>Get visual breakdown of your style</p>
+</div>
+
+<div class="feature">
+<h3>🎯 Smart Suggestions</h3>
+<p>Personalized learning tips</p>
+</div>
+
+</div>
+
+<!-- ABOUT -->
+<div class="about">
+<h2>About PathIQ</h2>
+
+<p>
+PathIQ is an AI-powered learning style analyzer that helps students understand how they learn best.
+It combines rule-based logic with machine learning to deliver accurate insights based on the VARK model.
+<br><br>
+Our goal is to make learning more effective, engaging, and personalized for everyone.
+</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Create Account | PathIQ</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+body{
+background:#020617;
+color:white;
+height:100vh;
+display:flex;
+flex-direction:column;
+}
+
+/* 🔝 NAVBAR */
+.nav{
+display:flex;
+justify-content:space-between;
+padding:20px 50px;
+align-items:center;
+}
+
+.logo{
+color:#38bdf8;
+font-size:22px;
+font-weight:600;
+}
+
+.nav a{
+color:#94a3b8;
+text-decoration:none;
+margin-left:20px;
+}
+
+.nav a:hover{color:white;}
+
+/* CENTER CARD */
+.wrapper{
+flex:1;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.card{
+width:400px;
+background:#0f172a;
+padding:35px;
+border-radius:20px;
+box-shadow:0 10px 40px rgba(0,0,0,0.5);
+}
+
+/* TITLE */
+.title{text-align:center;margin-bottom:20px;}
+.title p{color:#94a3b8;font-size:14px;}
+
+/* INPUT */
+.input-group{position:relative;}
+
+input{
+width:100%;
+padding:12px;
+margin-bottom:10px;
+border-radius:10px;
+border:none;
+background:#1e293b;
+color:white;
+outline:none;
+}
+
+input::placeholder{color:#94a3b8;}
+
+/* 👁️ */
+.eye{
+position:absolute;
+right:12px;
+top:12px;
+cursor:pointer;
+color:#94a3b8;
+}
+
+/* VALIDATION TEXT */
+.valid{
+font-size:12px;
+margin-bottom:5px;
+display:flex;
+align-items:center;
+gap:5px;
+}
+
+.valid span{
+font-size:14px;
+}
+
+/* BUTTON */
+.btn{
+width:100%;
+padding:12px;
+border:none;
+border-radius:25px;
+background:#38bdf8;
+color:black;
+font-weight:600;
+cursor:pointer;
+margin-top:10px;
+transition:0.3s;
+}
+
+.btn:hover{
+transform:scale(1.05);
+box-shadow:0 10px 30px rgba(56,189,248,0.4);
+}
+
+/* LINKS */
+.links{text-align:center;margin-top:15px;}
+.links a{color:#38bdf8;text-decoration:none;font-size:14px;}
+
+.error{
+color:#f87171;
+font-size:13px;
+text-align:center;
+margin-top:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- 🔝 NAV -->
+<div class="nav">
+<div class="logo">PathIQ</div>
+<div>
+<a href="/">Home</a>
+<a href="/login">Login</a>
+</div>
+</div>
+
+<!-- FORM -->
+<div class="wrapper">
+<div class="card">
+
+<div class="title">
+<h2>Create Account</h2>
+<p>Start your learning journey</p>
+</div>
+
+<form method="POST" onsubmit="return validateForm()">
+
+<input type="text" name="fname" placeholder="First Name" required>
+<input type="text" name="lname" placeholder="Last Name" required>
+<input type="email" name="email" placeholder="Email Address" required>
+
+<!-- PASSWORD -->
+<div class="input-group">
+<input type="password" id="password" name="password" placeholder="Password" required onkeyup="checkPassword()">
+<span class="eye" onclick="togglePassword('password')">👁️</span>
+</div>
+
+<!-- LIVE VALIDATION -->
+<div id="length" class="valid">❌ At least 6 characters</div>
+<div id="upper" class="valid">❌ One uppercase letter</div>
+<div id="number" class="valid">❌ One number</div>
+<div id="symbol" class="valid">❌ One special character</div>
+
+<!-- CONFIRM -->
+<div class="input-group">
+<input type="password" id="confirm" placeholder="Confirm Password" required onkeyup="checkMatch()">
+<span class="eye" onclick="togglePassword('confirm')">👁️</span>
+</div>
+
+<div id="match" class="valid">❌ Passwords must match</div>
+
+<button type="submit" class="btn">Register</button>
+
+{% if message %}
+<p class="error">{{ message }}</p>
+{% endif %}
+
+</form>
+
+<div class="links">
+<a href="/login">Already have an account? Login</a>
+</div>
+
+</div>
+</div>
+
+<script>
+function togglePassword(id){
+let input=document.getElementById(id);
+input.type = input.type === "password" ? "text" : "password";
+}
+
+function checkPassword(){
+let pass=document.getElementById("password").value;
+
+update("length", pass.length>=6);
+update("upper", /[A-Z]/.test(pass));
+update("number", /[0-9]/.test(pass));
+update("symbol", /[^A-Za-z0-9]/.test(pass));
+}
+
+function checkMatch(){
+let pass=document.getElementById("password").value;
+let confirm=document.getElementById("confirm").value;
+
+update("match", pass === confirm && pass.length>0);
+}
+
+function update(id, valid){
+let el=document.getElementById(id);
+if(valid){
+el.innerHTML="✔️ " + el.innerText.slice(2);
+el.style.color="#4ade80";
+}else{
+el.innerHTML="❌ " + el.innerText.slice(2);
+el.style.color="#f87171";
+}
+}
+
+function validateForm(){
+let allValid = 
+document.getElementById("length").style.color === "rgb(74, 222, 128)" &&
+document.getElementById("upper").style.color === "rgb(74, 222, 128)" &&
+document.getElementById("number").style.color === "rgb(74, 222, 128)" &&
+document.getElementById("symbol").style.color === "rgb(74, 222, 128)" &&
+document.getElementById("match").style.color === "rgb(74, 222, 128)";
+
+if(!allValid){
+alert("Please fix password requirements!");
+return false;
+}
+return true;
+}
+</script>
+
+</body>
+</html>

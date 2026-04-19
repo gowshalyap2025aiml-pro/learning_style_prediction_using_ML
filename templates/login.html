@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login - PathIQ</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#020617;
+color:white;
+}
+
+/* CONTAINER */
+.container{
+display:flex;
+width:850px;
+height:500px;
+background:#0f172a;
+border-radius:20px;
+overflow:hidden;
+box-shadow:0 10px 40px rgba(0,0,0,0.5);
+}
+
+/* LEFT SIDE */
+.left{
+flex:1;
+background:linear-gradient(135deg,#38bdf8,#6366f1);
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+padding:40px;
+text-align:center;
+}
+
+.left h1{
+font-size:32px;
+margin-bottom:10px;
+}
+
+.left p{
+font-size:14px;
+opacity:0.9;
+}
+
+/* RIGHT SIDE */
+.right{
+flex:1;
+display:flex;
+flex-direction:column;
+justify-content:center;
+padding:40px;
+}
+
+.right h2{
+margin-bottom:20px;
+}
+
+/* INPUT */
+.input-box{
+margin-bottom:15px;
+}
+
+.input-box input{
+width:100%;
+padding:12px;
+border-radius:10px;
+border:none;
+background:#1e293b;
+color:white;
+}
+
+/* BUTTON */
+.btn{
+width:100%;
+padding:12px;
+border:none;
+border-radius:25px;
+background:#38bdf8;
+color:black;
+font-weight:600;
+cursor:pointer;
+margin-top:10px;
+transition:0.3s;
+}
+
+.btn:hover{
+transform:scale(1.05);
+}
+
+/* ERROR */
+.error{
+color:#ef4444;
+margin-top:10px;
+}
+
+/* LINK */
+.link{
+margin-top:15px;
+font-size:14px;
+color:#94a3b8;
+}
+
+.link a{
+color:#38bdf8;
+text-decoration:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- LEFT -->
+<div class="left">
+<h1>Welcome Back 👋</h1>
+<p>Login to continue your learning journey with PathIQ</p>
+</div>
+
+<!-- RIGHT -->
+<div class="right">
+
+<h2>Login</h2>
+
+<form method="POST">
+
+<div class="input-box">
+<input type="email" name="email" placeholder="Enter Email" required>
+</div>
+
+<div class="input-box">
+<input type="password" name="password" placeholder="Enter Password" required>
+</div>
+
+<button class="btn">Login</button>
+
+{% if message %}
+<p class="error">{{ message }}</p>
+{% endif %}
+
+</form>
+
+<div class="link">
+Don't have an account? <a href="/register">Register</a>
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>
