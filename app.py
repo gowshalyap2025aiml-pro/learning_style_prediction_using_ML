@@ -13,7 +13,7 @@ app.secret_key = "secret123"
 
 model = pickle.load(open('model.pkl', 'rb')) #rb->read in binary mode 
 
-client = Groq(api_key="API KEY")   # <-- REPLACE WITH YOUR KEY
+client = Groq(api_key=os.getenv("GROQ_API_KEY"))  # <-- REPLACE WITH YOUR KEY
 
 
 def init_db():
