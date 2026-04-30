@@ -6,6 +6,7 @@ A Machine Learning web application that predicts a user's learning style (Visual
 👉 https://learning-style-prediction-using-ml-model.onrender.com
 
 💡 Features
+
 User login & registration
 Interactive quiz
 ML-based prediction
