@@ -8,13 +8,21 @@ A Machine Learning web application that predicts a user's learning style (Visual
 💡 Features
 
 User login & registration
+
 Interactive quiz
+
 ML-based prediction
+
 Graph visualization 📊
+
 Chatbot integration 🤖
+
 🧠 ML Approach
+
 Library: scikit-learn
+
 Type: Supervised Learning
+
 Model: Random Forest Classifier
 
 👉 Chosen because it reduces overfitting and gives stable, accurate results for classification.
@@ -24,9 +32,13 @@ Model: Random Forest Classifier
 Python | Flask | scikit-learn | SQLite | HTML/CSS | Render
 
 ⚙️ Run Locally
+
 git clone https://github.com/your-username/learning_style_prediction_using_ML.git
+
 cd learning_style_prediction_using_ML
+
 pip install -r requirements.txt
+
 python app.py
 
 📌 Author
