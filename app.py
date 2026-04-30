@@ -13,7 +13,7 @@ app.secret_key = "secret123"
 
 model = pickle.load(open('model.pkl', 'rb')) #rb->read in binary mode 
 
-client = Groq(api_key="API-KEY")   # <-- REPLACE WITH YOUR KEY
+client = Groq(api_key="API KEY")   # <-- REPLACE WITH YOUR KEY
 
 
 def init_db():
@@ -263,4 +263,5 @@ def view_users():
 
 # ================= RUN =================
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)

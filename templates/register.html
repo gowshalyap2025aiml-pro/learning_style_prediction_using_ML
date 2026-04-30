@@ -16,7 +16,7 @@ display:flex;
 flex-direction:column;
 }
 
-/* 🔝 NAVBAR */
+
 .nav{
 display:flex;
 justify-content:space-between;
@@ -38,7 +38,7 @@ margin-left:20px;
 
 .nav a:hover{color:white;}
 
-/* CENTER CARD */
+
 .wrapper{
 flex:1;
 display:flex;
@@ -54,11 +54,11 @@ border-radius:20px;
 box-shadow:0 10px 40px rgba(0,0,0,0.5);
 }
 
-/* TITLE */
+
 .title{text-align:center;margin-bottom:20px;}
 .title p{color:#94a3b8;font-size:14px;}
 
-/* INPUT */
+
 .input-group{position:relative;}
 
 input{
@@ -74,7 +74,7 @@ outline:none;
 
 input::placeholder{color:#94a3b8;}
 
-/* 👁️ */
+
 .eye{
 position:absolute;
 right:12px;
@@ -83,7 +83,7 @@ cursor:pointer;
 color:#94a3b8;
 }
 
-/* VALIDATION TEXT */
+
 .valid{
 font-size:12px;
 margin-bottom:5px;
@@ -96,7 +96,7 @@ gap:5px;
 font-size:14px;
 }
 
-/* BUTTON */
+
 .btn{
 width:100%;
 padding:12px;
@@ -115,7 +115,7 @@ transform:scale(1.05);
 box-shadow:0 10px 30px rgba(56,189,248,0.4);
 }
 
-/* LINKS */
+
 .links{text-align:center;margin-top:15px;}
 .links a{color:#38bdf8;text-decoration:none;font-size:14px;}
 
@@ -131,7 +131,7 @@ margin-top:10px;
 
 <body>
 
-<!-- 🔝 NAV -->
+
 <div class="nav">
 <div class="logo">PathIQ</div>
 <div>
@@ -155,13 +155,13 @@ margin-top:10px;
 <input type="text" name="lname" placeholder="Last Name" required>
 <input type="email" name="email" placeholder="Email Address" required>
 
-<!-- PASSWORD -->
+
 <div class="input-group">
 <input type="password" id="password" name="password" placeholder="Password" required onkeyup="checkPassword()">
 <span class="eye" onclick="togglePassword('password')">👁️</span>
 </div>
 
-<!-- LIVE VALIDATION -->
+
 <div id="length" class="valid">❌ At least 6 characters</div>
 <div id="upper" class="valid">❌ One uppercase letter</div>
 <div id="number" class="valid">❌ One number</div>

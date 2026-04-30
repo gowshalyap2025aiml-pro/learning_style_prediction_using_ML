@@ -17,7 +17,6 @@ align-items:center;
 min-height:100vh;
 }
 
-/* 🔥 TOP BUTTONS (NEW - DOES NOT BREAK UI) */
 .top-bar{
 position:fixed;
 top:20px;
@@ -43,14 +42,12 @@ background:#ef4444;
 color:white;
 }
 
-/* MAIN */
 .quiz-container{
 width:100%;
 max-width:700px;
 padding:20px;
 }
 
-/* progress */
 .progress{
 height:6px;
 background:#1e293b;
@@ -64,18 +61,17 @@ background:#38bdf8;
 border-radius:10px;
 }
 
-/* box */
+
 .question-box{
 background:#0f172a;
 padding:30px;
 border-radius:20px;
 }
 
-/* text */
 .counter{color:#94a3b8;margin-bottom:10px;}
 .question-text{font-size:22px;margin-bottom:20px;}
 
-/* options */
+
 .options{display:flex;flex-direction:column;gap:12px;}
 .option{
 padding:14px;
@@ -104,7 +100,7 @@ display:none;
 
 <body>
 
-<!-- 🔥 TOP BUTTONS (ADDED ONLY) -->
+
 <div class="top-bar">
 <a href="/"><button class="home-btn">🏠 Home</button></a>
 <a href="/logout"><button class="logout-btn">Logout</button></a>
@@ -131,7 +127,7 @@ display:none;
 
 </form>
 
-<!-- RESULT -->
+
 {% if result %}
 <div style="margin-top:30px;background:#0f172a;padding:25px;border-radius:15px;text-align:center;">
 
@@ -228,7 +224,7 @@ loadQuestion();
 
 let form=document.getElementById("quizForm");
 
-/* send only values */
+
 for(let key in answers){
 let input=document.createElement("input");
 input.type="hidden";

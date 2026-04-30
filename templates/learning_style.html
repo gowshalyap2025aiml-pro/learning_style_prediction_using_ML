@@ -379,7 +379,7 @@ and mind maps rather than hearing explanations alone.
 
 <script>
 
-/* TAB SWITCH */
+
 function openTab(e,id){
 document.querySelectorAll('.content').forEach(c=>c.classList.remove('active'));
 document.getElementById(id).classList.add('active');
@@ -388,7 +388,7 @@ document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
 e.target.classList.add('active');
 }
 
-/* CHAT */
+
 async function sendMsg(id){
 let input=document.getElementById(`input_${id}`);
 let msg=input.value.trim();
